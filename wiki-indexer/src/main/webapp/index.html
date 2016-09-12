@@ -3,11 +3,13 @@
 <head>
     <title>Wiki Indexer</title>
 
-    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous" />
-    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.1/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-hQpvDQiCJaD2H465dQfA717v7lu5qHWtDbWNPvaTJ0ID5xnPUlVXnKzq7b8YUkbN" crossorigin="anonymous" />
-    <link href="css/custom.css" rel="stylesheet" />
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous"/>
+    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.1/css/font-awesome.min.css" rel="stylesheet"
+          integrity="sha384-hQpvDQiCJaD2H465dQfA717v7lu5qHWtDbWNPvaTJ0ID5xnPUlVXnKzq7b8YUkbN" crossorigin="anonymous"/>
+    <link href="css/custom.css" rel="stylesheet"/>
 
-    <script src = "https://cdn.zingchart.com/zingchart.min.js" ></script>
+    <script src="https://cdn.zingchart.com/zingchart.min.js"></script>
     <script>
         zingchart.MODULESDIR = "https://cdn.zingchart.com/modules/";
         ZC.LICENSE = ["569d52cefae586f634c54f86dc99e6a9", "ee6b7db5b51705a13dc2339db3edaf6d"];
@@ -21,7 +23,16 @@
 <div class="main-content-holder">
     <div class="container ng-hide" ng-show="initialized" ng-controller="IndexController">
         <div>
-            <h2>Wiki Indexer Of Awesomeness</h2>
+            <div class="header">
+                <button type="button" class="btn" title="About" data-trigger="hover" data-toggle="popover"
+                        data-placement="left"
+                        data-content="The purpose of the project is to return the most ten frequent words from a certain article
+                                     or the most ten frequent words from several articles. The user can either see the one input result or
+                                     the aggregate result from multiple articles. ">
+                    About Wiki-Indexer
+                </button>
+                <h2>Wiki Indexer Of Awesomeness</h2>
+            </div>
 
             <div class="moveRight">Search Word: <input type="checkbox" ng-model="mode"></div>
             <div class="row input-holder">
@@ -102,12 +113,13 @@
 </div>
 
 <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.js"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"
+        integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS"
+        crossorigin="anonymous"></script>
 <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.6/angular.min.js"></script>
 <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.6/angular-resource.js"></script>
 <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.6/angular-route.js"></script>
 <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.6/angular-cookies.js"></script>
-
 
 
 <script src="https://cdn.zingchart.com/zingchart.min.js"></script>
@@ -124,5 +136,10 @@
     });
 </script>
 
+<script>
+    $(document).ready(function () {
+        +$('[data-toggle="popover"]').popover();
+    });
+</script>
 </body>
 </html>
