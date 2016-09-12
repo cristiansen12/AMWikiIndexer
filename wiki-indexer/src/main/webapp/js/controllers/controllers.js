@@ -317,6 +317,8 @@ function validate(string) {
                     $scope.response.$promise.then(function (data) {
                         $scope.word = data.wordDTO.word;
                         $scope.occurrences = data.wordDTO.occurrences;
+                        $scope.duration = data.duration;
+                        $scope.source = data.source;
 
                         $scope.titles = data.titles.join(",");
                         for (var key in data.wordsList) {
