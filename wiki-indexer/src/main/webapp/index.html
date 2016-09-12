@@ -45,7 +45,7 @@
                                    ng-model="title" ng-pattern="example.word" required ng-trim="true">
                         </div>
                         <div class="myMargin">
-                            <button class="btn btn-primary" ng-click="searchWord(title,word)">
+                            <button class="btn btn-primary" ng-click="searchWord(title,word)" onclick="clearError()">
                                 Search
                             </button>
                         </div>
@@ -68,7 +68,9 @@
                                    ng-model="title" ng-pattern="example.word" required ng-trim="true">
                         </div>
                         <div class="myMargin">
-                            <button class="btn btn-primary" ng-click="searchArticle(title)">Search</button>
+                            <button class="btn btn-primary" ng-click="searchArticle(title)" onclick="clearError()">
+                                Search
+                            </button>
                         </div>
                     </form>
                 </div>
@@ -80,9 +82,11 @@
                         <div class="input-group file-upload">
                             <label class="input-group-btn">
                     <span class="btn btn-success">
+                        <form id="myFileForm">
                         Choose file&hellip; <input type="file" ng-model="uploadedFile" demo-file-model="myFile"
                                                    class="form-control" id="myFileField" style="display: none;"
                                                    onchange="validateFile(this);" accept="text/plain">
+                        </form>
                     </span>
                             </label>
                             <p name="Errors"></p>
