@@ -25,8 +25,11 @@ function validate(string) {
                     var dataSeries = [];
                     $scope.response = WordIndexFactory.query({title: title});
                     $scope.response.$promise.then(function (data) {
+
                         $scope.searchDate = data.date;
                         $scope.titles = data.titles.join(",");
+                        $scope.duration = data.duration;
+                        $scope.source = data.source;
                         for (var key in data.wordsList) {
                             labels.push(data.wordsList[key].word);
                             dataSeries.push(data.wordsList[key].occurrences);
@@ -49,10 +52,7 @@ function validate(string) {
 
                         $scope.backgroundColor = "#FF0000"
 
-                        console.log(data);
-                        console.log(data.mode);
-                        console.log($scope.devEnvironment);
-                        console.log($scope.releaseEnvironment);
+                        console.log($scope.response);
                     });
                 }
 
@@ -75,7 +75,7 @@ function validate(string) {
                     ]
                 };
 
-                console.log($scope.topWordsChartJson);
+                
                 $rootScope.showContentWord = true;
             };
 
