@@ -35,9 +35,9 @@ public class JsonArticleParserService implements ArticleParserService {
             "as", "that", "is", "with", "for", "or", "they", "be", "on", "their", "have", "other", "used",
             "from", "can", "also", "such", "were", "an", "by", "which", "in", "this", "often", "even", "had",
             "has", "not", "been", "some", "it", "n", "many", "its", "s", "000", "nthe", "use", "frp", "but",
-            "ten", "half", "de", "at", "was", "most", "1", "u2014", "u", "san", "i", "ii", "k", "first",
-            "c", "st","his", "her","he","she", "0", "2", "3", "4", "5", "6","7","8","9",
-            "ten", "half", "de", "at", "was", "most", "1","u","san", "who", "0");
+            "ten", "half", "de", "at", "was", "most", "1", "u2014", "u", "san", "i", "ii", "k", "first", "all",
+            "c", "st","his", "her","he","she", "0", "2", "3", "4", "5", "6","7","8","9", "000", "about",
+            "ten", "half", "de", "at", "was", "most", "1","u","san", "who", "0", "one", "after", "into");
 
     @Autowired
     private HttpRequestService httpRequestService;
