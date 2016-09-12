@@ -22,3 +22,7 @@ function validateFile(oInput) {
     }
     return true;
 }
+
+function clearError() {
+    document.getElementById("errorText").innerHTML = "";
+}
