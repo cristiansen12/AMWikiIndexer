@@ -2,6 +2,7 @@
 <html ng-app="wikiIndexerApp">
 <head>
     <title>Wiki Indexer</title>
+
     <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous" />
     <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.1/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-hQpvDQiCJaD2H465dQfA717v7lu5qHWtDbWNPvaTJ0ID5xnPUlVXnKzq7b8YUkbN" crossorigin="anonymous" />
     <link href="css/custom.css" rel="stylesheet" />
@@ -12,27 +13,16 @@
         ZC.LICENSE = ["569d52cefae586f634c54f86dc99e6a9", "ee6b7db5b51705a13dc2339db3edaf6d"];
     </script>
 </head>
-<body>
+<body ng-style="environmentObj" ng-controller="IndexController">
 <div class="loader" ng-hide="initialized">
     <p>Loading...</p>
     <p><span class="fa fa-spinner fa-spin"></span></p>
 </div>
 <div class="main-content-holder">
     <div class="container ng-hide" ng-show="initialized" ng-controller="IndexController">
-
-            <div class="header">
-                <h2>Wiki-Indexer</h2>
-
-                <button type="button" class="btn active">
-                   <!--<a href="#" title="About" data-trigger="hover" data-toggle="popover" data-placement="left" data-content="The purpose of the project is to return the most ten frequent words from a certain article-->
-                    <!--or the most ten frequent words from several articles. The user can either see the one input result or the aggregate result from multiple articles. ">-->
-                    <!--About Wiki-Indexer</a>-->
-                    <div title="About" data-trigger="hover" data-toggle="popover" data-placement="left" data-content="The purpose of the project is to return the most ten frequent words from a certain article
-                    or the most ten frequent words from several articles. The user can either see the one input result or the aggregate result from multiple articles. ">
-                        About Wiki-Indexer</div>
-                </button>
-            </div>
-
+        <div>
+            <h2>Wiki Indexer Of Awesomeness</h2>
+            <h2>Version: {{version}}</h2>
             <div class="moveRight">Search Word: <input type="checkbox" ng-model="mode"></div>
             <div class="row input-holder">
 
@@ -104,19 +94,21 @@
 
         </div>
 
+
         <div ng-view>
 
         </div>
     </div>
 </div>
 
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
 <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
 <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.6/angular.min.js"></script>
 <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.6/angular-resource.js"></script>
 <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.6/angular-route.js"></script>
 <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.6/angular-cookies.js"></script>
+
+
 
 <script src="https://cdn.zingchart.com/zingchart.min.js"></script>
 <script src="https://cdn.zingchart.com/angular/zingchart-angularjs.js"></script>
@@ -126,13 +118,6 @@
 <script type="text/javascript" src="js/services/services.js"></script>
 <script type="text/javascript" src="js/controllers/controllers.js"></script>
 <script type="text/javascript" src="js/directives/directives.js"></script>
-
-<script>
-    $(document).ready(function(){
-        $('[data-toggle="popover"]').popover();
-    });
-</script>
-
 <script>
     $('input[type="file"]').change(function () {
         $("#file-name-holder").val($(this)[0].files[0].name);
