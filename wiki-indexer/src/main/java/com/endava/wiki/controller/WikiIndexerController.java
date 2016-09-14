@@ -75,19 +75,19 @@ public class WikiIndexerController {
 
         MetadataDTO metadataDTO = new MetadataDTO();
 
-        try {
-            if (InetAddress.getLocalHost().getHostAddress().equals(IP)) {
+    try {
+        if (InetAddress.getLocalHost().getHostAddress().equals(IP)) {
 //                System.out.println("equals!");
-                metadataDTO.setEnvironment(1);
-            } else {
+            metadataDTO.setEnvironment(1);
+        } else {
 //                System.out.println("not equals!");
-                metadataDTO.setEnvironment(0); //release
-            }
-//            System.out.println(InetAddress.getLocalHost().getHostAddress());
-        } catch (UnknownHostException e) {
-            e.printStackTrace();
+            metadataDTO.setEnvironment(0); //release
         }
-
-        return metadataDTO;
+//            System.out.println(InetAddress.getLocalHost().getHostAddress());
+    } catch (UnknownHostException e) {
+        e.printStackTrace();
     }
+
+    return metadataDTO;
+}
 }
