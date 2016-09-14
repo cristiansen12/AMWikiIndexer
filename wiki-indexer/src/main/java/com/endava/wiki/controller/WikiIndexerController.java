@@ -2,7 +2,6 @@ package com.endava.wiki.controller;
 
 import com.endava.wiki.dto.ArticleDTO;
 import com.endava.wiki.dto.MetadataDTO;
-import com.endava.wiki.dto.VersionEntity;
 import com.endava.wiki.dto.WordDTO;
 import com.endava.wiki.service.WordFrequencyService;
 import com.endava.wiki.service.impl.FindWordServiceImpl;
@@ -10,7 +9,10 @@ import com.endava.wiki.service.impl.ReadToArrayFileService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.util.FileCopyUtils;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.File;
@@ -75,36 +77,17 @@ public class WikiIndexerController {
     public MetadataDTO getInitData() throws IOException {
 
         MetadataDTO metadataDTO = new MetadataDTO();
-
-        try {
-            if (InetAddress.getLocalHost().getHostAddress().equals(IP)) {
-                System.out.println("equals!");
-                metadataDTO.setEnvironment(1);
-            } else {
-                System.out.println("not equals!");
-                metadataDTO.setEnvironment(0); //release
-            }
-//            System.out.println(InetAddress.getLocalHost().getHostAddress());
-        } catch (UnknownHostException e) {
-            e.printStackTrace();
-        }
-
-        return metadataDTO;
-    }
-
-    @RequestMapping(value = "/version", method = RequestMethod.GET, produces = "application/json;  charset-utf-8")
-    public @ResponseBody VersionEntity getVersion() throws IOException {
-
         String version = null;
 
         try {
-            Properties p = new Properties();
-            InputStream is = getClass().getResourceAsStream("../../../../my.properties");
-            if (is != null) {
-                p.load(is);
-                version = p.getProperty("version", "");
+            Properties props = new Properties();
+            InputStream inputStream = getClass().getResourceAsStream("../../../../my.properties");
+            if (inputStream != null) {
+                props.load(inputStream);
+                version = props.getProperty("version", "");
             }
         } catch (Exception e) {
+            System.out.println("encounterred an exception! :(");
         }
 
         if (version == null) {
@@ -121,6 +104,23 @@ public class WikiIndexerController {
             version = "";
         }
 
-        return new VersionEntity(version);
+//        System.out.println(version + " - versiunea");
+        metadataDTO.setVersion(version);
+
+        try {
+            if (InetAddress.getLocalHost().getHostAddress().equals(IP)) {
+//                System.out.println("equals!");
+                metadataDTO.setEnvironment(1);
+            } else {
+//                System.out.println("not equals!");
+                metadataDTO.setEnvironment(0); //release
+            }
+//            System.out.println(InetAddress.getLocalHost().getHostAddress());
+        } catch (UnknownHostException e) {
+            e.printStackTrace();
+        }
+
+//        System.out.println(metadataDTO.getVersion());
+        return metadataDTO;
     }
 }

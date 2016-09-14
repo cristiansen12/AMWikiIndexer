@@ -13,7 +13,7 @@ function validate(string) {
 
     var controllers = angular.module('wikiIndexerApp.controllers', ['zingchart-angularjs']);
 
-    controllers.controller('IndexController', ['$rootScope', '$scope', 'WordIndexFactory', 'FileUploadFactory', 'SearchWordFactory', 'InitFactory', 'GetVersion',
+    controllers.controller('IndexController', ['$rootScope', '$scope', 'WordIndexFactory', 'FileUploadFactory', 'SearchWordFactory', 'InitFactory',
         function ($rootScope, $scope, WordIndexFactory, FileUploadFactory, SearchWordFactory, InitFactory, GetVersion) {
 
             $scope.searchArticle = function (title) {
@@ -357,8 +357,10 @@ function validate(string) {
             };
 
             $scope.init = function () {
+                $scope.version = 'asdf';
                 $scope.response = InitFactory.query({});
                 $scope.response.$promise.then(function (data) {
+                    $scope.version = data.version;
                     $scope.environmentObj = {
                         "color" : "black",
                         "backgroundColor" : "white"
@@ -371,17 +373,8 @@ function validate(string) {
                 });
             };
 
-
-            $scope.getVersion = function () {
-                $scope.version = '';
-                $scope.response = GetVersion.query({});
-                $scope.response.$promise.then(function (data) {
-                   $scope.version = data.version;
-                });
-            };
-
             $scope.init();
-            $scope.getVersion();
+
         }]);
 
 })();

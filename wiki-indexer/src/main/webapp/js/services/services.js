@@ -35,9 +35,5 @@
         return $resource('wiki-indexer/init', {}, {
             query: {method: 'GET', params: {}, isArray: false}
         });
-    }).factory('GetVersion', function ($resource) {
-        return $resource('wiki-indexer/version', {}, {
-            query: {method: 'GET', params: {}, isArray: false}
-        });
-    });
+    })
 })();

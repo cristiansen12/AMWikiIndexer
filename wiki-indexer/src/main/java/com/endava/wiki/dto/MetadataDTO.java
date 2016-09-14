@@ -18,4 +18,8 @@ public class MetadataDTO {
     public void setVersion(String version) {
         this.version = version;
     }
+
+    public String getVersion() {
+        return version;
+    }
 }
