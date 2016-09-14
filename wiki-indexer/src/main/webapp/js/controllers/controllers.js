@@ -81,6 +81,8 @@ function validate(string) {
                         promise = FileUploadFactory.uploadFileToUrl(file, uploadUrl);
                     promise.then(function (response) {
                         $scope.response = response;
+                        $scope.source = response.source;
+                        $scope.duration = response.duration;
 
                         var aux = {"values": [], text: ''};
                         $scope.seriesAux = [];
@@ -349,8 +351,10 @@ function validate(string) {
             };
 
             $scope.init = function () {
+                $scope.version = '___';
                 $scope.response = InitFactory.query({});
                 $scope.response.$promise.then(function (data) {
+                    $scope.version = data.version;
                     $scope.environmentObj = {
                         "color" : "black",
                         "backgroundColor" : "white"
@@ -363,6 +367,7 @@ function validate(string) {
                     }
                 });
             };
+            $scope.init();
 
         }]);
 })();

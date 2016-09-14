@@ -19,6 +19,7 @@ import java.io.*;
 import java.net.InetAddress;
 import java.net.UnknownHostException;
 import java.util.List;
+import java.util.Properties;
 
 /**
  * Created by aancuta on 8/10/2016.
@@ -45,8 +46,7 @@ public class WikiIndexerController {
 
     @RequestMapping(value = "/indexate", method = RequestMethod.GET)
     public ArticleDTO getWordFrequency(@RequestParam(value = "title") String title) {
-        ArticleDTO ret = wordFrequencyService.getWordsByFrequency(title);
-        return ret;
+        return wordFrequencyService.getWordsByFrequency(title);
     }
 
     @RequestMapping(value = "/file", method = RequestMethod.POST)
@@ -71,23 +71,54 @@ public class WikiIndexerController {
     }
 
     @RequestMapping(value = "/init")
-    public MetadataDTO getInitData() {
+    public MetadataDTO getInitData() throws IOException {
 
         MetadataDTO metadataDTO = new MetadataDTO();
+        String version = null;
 
-    try {
-        if (InetAddress.getLocalHost().getHostAddress().equals(IP)) {
-//                System.out.println("equals!");
-            metadataDTO.setEnvironment(1);
-        } else {
-//                System.out.println("not equals!");
-            metadataDTO.setEnvironment(0); //release
+        try {
+            Properties props = new Properties();
+            InputStream inputStream = getClass().getResourceAsStream("../../../../my.properties");
+            if (inputStream != null) {
+                props.load(inputStream);
+                version = props.getProperty("version", "");
+            }
+        } catch (Exception e) {
+            System.out.println("encounterred an exception! :(");
         }
-//            System.out.println(InetAddress.getLocalHost().getHostAddress());
-    } catch (UnknownHostException e) {
-        e.printStackTrace();
-    }
 
-    return metadataDTO;
-}
+        if (version == null) {
+            Package aPackage = getClass().getPackage();
+            if (aPackage != null) {
+                version = aPackage.getImplementationVersion();
+                if (version == null) {
+                    version = aPackage.getSpecificationVersion();
+                }
+            }
+        }
+
+        if (version == null) {
+            version = "";
+        }
+
+//        System.out.println(version + " - versiunea");
+        metadataDTO.setVersion(version);
+        System.out.println(metadataDTO.getVersion() + "asdf");
+
+        try {
+            if (InetAddress.getLocalHost().getHostAddress().equals(IP)) {
+//                System.out.println("equals!");
+                metadataDTO.setEnvironment(1);
+            } else {
+//                System.out.println("not equals!");
+                metadataDTO.setEnvironment(0); //release
+            }
+//            System.out.println(InetAddress.getLocalHost().getHostAddress());
+        } catch (UnknownHostException e) {
+            e.printStackTrace();
+        }
+
+//        System.out.println(metadataDTO.getVersion());
+        return metadataDTO;
+    }
 }

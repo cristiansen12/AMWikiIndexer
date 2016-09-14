@@ -21,6 +21,7 @@ public class FindWordServiceImpl implements FindWordService {
 
         String newTitle = title.replaceAll(" ","_");
 
+        wordToBeFound = wordToBeFound.toLowerCase();
 
         WordDTO wordDTO = new WordDTO();
 

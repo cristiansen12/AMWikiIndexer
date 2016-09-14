@@ -2,18 +2,11 @@
 <html ng-app="wikiIndexerApp">
 <head>
     <title>Wiki Indexer</title>
-
     <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet"
           integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous"/>
     <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.1/css/font-awesome.min.css" rel="stylesheet"
           integrity="sha384-hQpvDQiCJaD2H465dQfA717v7lu5qHWtDbWNPvaTJ0ID5xnPUlVXnKzq7b8YUkbN" crossorigin="anonymous"/>
     <link href="css/custom.css" rel="stylesheet"/>
-
-    <script src="https://cdn.zingchart.com/zingchart.min.js"></script>
-    <script>
-        zingchart.MODULESDIR = "https://cdn.zingchart.com/modules/";
-        ZC.LICENSE = ["569d52cefae586f634c54f86dc99e6a9", "ee6b7db5b51705a13dc2339db3edaf6d"];
-    </script>
 </head>
 <body ng-style="environmentObj" ng-controller="IndexController">
 <div class="loader" ng-hide="initialized">
@@ -32,6 +25,7 @@
                     About Wiki-Indexer
                 </button>
                 <h2>Wiki Indexer Of Awesomeness</h2>
+                <h2>Version: {{version}}</h2>
             </div>
 
             <div class="moveRight">Search Word: <input type="checkbox" ng-model="mode"></div>
@@ -45,6 +39,7 @@
                                    ng-model="title" ng-pattern="example.word" required ng-trim="true">
                         </div>
                         <div class="myMargin">
+
                             <button class="btn btn-primary" ng-click="searchWord(title,word)" onclick="clearError()">
                                 Search
                             </button>
@@ -74,19 +69,16 @@
                         </div>
                     </form>
                 </div>
-
-
                 <!--File Upload-->
+
                 <form>
                     <div class="col-md-4">
                         <div class="input-group file-upload">
                             <label class="input-group-btn">
                     <span class="btn btn-success">
-                        <form id="myFileForm">
                         Choose file&hellip; <input type="file" ng-model="uploadedFile" demo-file-model="myFile"
                                                    class="form-control" id="myFileField" style="display: none;"
                                                    onchange="validateFile(this);" accept="text/plain">
-                        </form>
                     </span>
                             </label>
                             <p name="Errors"></p>
@@ -108,7 +100,6 @@
             </h3>
 
         </div>
-
 
         <div ng-view>
 
