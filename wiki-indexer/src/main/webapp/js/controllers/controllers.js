@@ -11,7 +11,7 @@ function validate(string) {
 
     /* Controllers */
 
-    var controllers = angular.module('wikiIndexerApp.controllers', ['zingchart-angularjs']);
+    var controllers = angular.module('wikiIndexerApp.controllers', [ 'zingchart-angularjs']);
 
     controllers.controller('IndexController', ['$rootScope', '$scope', 'WordIndexFactory', 'FileUploadFactory', 'SearchWordFactory', 'InitFactory',
         function ($rootScope, $scope, WordIndexFactory, FileUploadFactory, SearchWordFactory, InitFactory) {
@@ -27,34 +27,24 @@ function validate(string) {
                     $scope.response.$promise.then(function (data) {
                         $scope.searchDate = data.date;
                         $scope.titles = data.titles.join(",");
+                        $scope.duration = data.duration;
+                        $scope.source = data.source;
+
                         for (var key in data.wordsList) {
                             labels.push(data.wordsList[key].word);
                             dataSeries.push(data.wordsList[key].occurrences);
                         }
                         $scope.listSize = dataSeries.length;
-                        if (data.mode == 0) {
-                            $scope.devEnvironment = true;
-                            $scope.releaseEnvironment = false;
-                        } else {
-                            $scope.devEnvironment = false;
-                            $scope.releaseEnvironment = true;
-                        }
-                        if ($scope.listSize > 0) {
+                        if( $scope.listSize > 0){
                             $scope.showContent = true;
                             $scope.showError = false;
-                        } else {
+                        }else{
                             $scope.showContent = false;
                             $scope.showError = true;
                         }
-
-                        $scope.backgroundColor = "#FF0000"
-
-                        console.log(data);
-                        console.log(data.mode);
-                        console.log($scope.devEnvironment);
-                        console.log($scope.releaseEnvironment);
                     });
                 }
+
 
 
                 $scope.topWordsChartJson = {
@@ -91,6 +81,8 @@ function validate(string) {
                         promise = FileUploadFactory.uploadFileToUrl(file, uploadUrl);
                     promise.then(function (response) {
                         $scope.response = response;
+                        $scope.source = response.source;
+                        $scope.duration = response.duration;
 
                         var aux = {"values": [], text: ''};
                         $scope.seriesAux = [];
@@ -233,7 +225,7 @@ function validate(string) {
                     })
                 }
 
-                if (e.id === 'myNextChart') {
+                if (e.id === 'myNextChart'){
                     $scope.$apply(function () {
                         $scope.topWordsChartJson2.plot.tooltip.visible = true;
                         $rootScope.showContentPie = false;
@@ -243,9 +235,9 @@ function validate(string) {
                     })
                 }
             }
-            zingchart.node_mouseover = function (e) {
+            zingchart.node_mouseover = function(e) {
                 if (e.id === 'myChart') {
-                    $scope.$apply(function () {
+                    $scope.$apply(function(){
                         $scope.topWordsChartJson1.plot.tooltip.visible = false;
                         //        $scope.topWordsChartJson2.plot.animation.OnLegendToggle = false;
                         $rootScope.showContentBar = false;
@@ -255,8 +247,8 @@ function validate(string) {
                         var applyLabels = [];
                         var applyDataSeries = [];
                         for (var key in $scope.response.articles) {
-                            if ($scope.topWordsChartJson2.series[e.plotindex].text == $scope.response.articles[key].title) {
-                                for (var word in $scope.response.articles[key].wordsList) {
+                            if ($scope.topWordsChartJson2.series[e.plotindex].text == $scope.response.articles[key].title){
+                                for (var word in $scope.response.articles[key].wordsList){
                                     applyLabels.push($scope.response.articles[key].wordsList[word].word);
                                     applyDataSeries.push($scope.response.articles[key].wordsList[word].occurrences);
                                 }
@@ -276,22 +268,22 @@ function validate(string) {
                 }
 
                 if (e.id === 'myNextChart') {
-                    $scope.$apply(function () {
+                    $scope.$apply(function() {
                         $scope.topWordsChartJson2.plot.tooltip.visible = false;
                         $rootScope.showContentPie = false;
 
                         var seriesAux1 = [];
-                        var aux = {"values": [], text: ''};
+                        var aux = {"values":[], text:''};
 
                         var clickedWord = $scope.topWordsChartJson1.scaleX.values[e.nodeindex];
-                        for (var key in $scope.response.articles) {
-                            for (var word in $scope.response.articles[key].wordsList) {
-                                if ($scope.response.articles[key].wordsList[word].word == clickedWord) {
+                        for (var key in $scope.response.articles){
+                            for (var word in $scope.response.articles[key].wordsList){
+                                if ($scope.response.articles[key].wordsList[word].word == clickedWord){
                                     aux.values.push($scope.response.articles[key].wordsList[word].occurrences);
                                     aux.text += $scope.response.articles[key].title;
                                     seriesAux1.push(aux);
 
-                                    aux = {"values": [], text: ''};
+                                    aux = {"values":[], text:''};
                                 }
                             }
                         }
@@ -317,6 +309,8 @@ function validate(string) {
                     $scope.response.$promise.then(function (data) {
                         $scope.word = data.wordDTO.word;
                         $scope.occurrences = data.wordDTO.occurrences;
+                        $scope.duration = data.duration;
+                        $scope.source = data.source;
 
                         $scope.titles = data.titles.join(",");
                         for (var key in data.wordsList) {
@@ -324,10 +318,10 @@ function validate(string) {
                             dataSeries.push(data.wordsList[key].occurrences);
                         }
                         $scope.listSize = dataSeries.length;
-                        if ($scope.listSize > 0) {
+                        if( $scope.listSize > 0){
                             $scope.showContent = true;
                             $scope.showError = false;
-                        } else {
+                        }else{
                             $scope.showContent = false;
                             $scope.showError = true;
                         }
@@ -357,13 +351,15 @@ function validate(string) {
             };
 
             $scope.init = function () {
+                $scope.version = '___';
                 $scope.response = InitFactory.query({});
                 $scope.response.$promise.then(function (data) {
+                    $scope.version = data.version;
                     $scope.environmentObj = {
                         "color" : "black",
                         "backgroundColor" : "white"
                     }
-                    
+
 
                     if (data.environment === 0) {
                         $scope.environmentObj.color = "white";
@@ -371,9 +367,7 @@ function validate(string) {
                     }
                 });
             };
-
             $scope.init();
+
         }]);
-
 })();
-

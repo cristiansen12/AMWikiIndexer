@@ -9,8 +9,17 @@ public class MetadataDTO {
     }
 
     private int environment;
+    private String version;
 
     public void setEnvironment(int environment) {
         this.environment = environment;
+    }
+
+    public void setVersion(String version) {
+        this.version = version;
+    }
+
+    public String getVersion() {
+        return version;
     }
 }
