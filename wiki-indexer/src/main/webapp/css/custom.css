@@ -98,3 +98,8 @@ body {
 .header h2 {
 + display: inline-block;
 }
+
+.versionFooter {
+    padding-right: 100px;
+    float: right;
+}

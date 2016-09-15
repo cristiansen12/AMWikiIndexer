@@ -40,6 +40,10 @@ function validate(string) {
                             $scope.showError = false;
                         }else{
                             $scope.showContent = false;
+                            $scope.showContentBar = false;
+                            $scope.showContentPie = false;
+                            $scope.showContentWhatever = false;
+                            $scope.showContentWord = false;
                             $scope.showError = true;
                         }
                     });
