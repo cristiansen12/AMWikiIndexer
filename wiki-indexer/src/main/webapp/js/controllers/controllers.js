@@ -352,8 +352,8 @@ function validate(string) {
 
             $scope.init = function () {
                 $scope.version = '___';
-                $scope.response = InitFactory.query({});
-                $scope.response.$promise.then(function (data) {
+                $scope.response1 = InitFactory.query({});
+                $scope.response1.$promise.then(function (data) {
                     $scope.version = data.version;
                     $scope.environmentObj = {
                         "color" : "black",

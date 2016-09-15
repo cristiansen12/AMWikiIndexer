@@ -19,8 +19,8 @@
             <div class="header">
                 <button type="button" class="btn" title="About" data-trigger="hover" data-toggle="popover"
                         data-placement="left"
-                        data-content="The purpose of the project is to return the most ten frequent words from a certain article
-                                     or the most ten frequent words from several articles. The user can either see the one input result or
+                        data-content="The purpose of the project is to return the top ten words from a certain article
+                                     or the top ten words from several articles. The user can either see the single input result or
                                      the aggregate result from multiple articles. ">
                     About Wiki-Indexer
                 </button>
@@ -88,6 +88,7 @@
                     </div>
                     <div class="col-md-2">
                         <button ng-click="uploadFile()" class="btn btn-primary moveDown">Upload File</button>
+                        <button style="display: none" onclick="reset($('#myFileField'));" id="resetButton" class="btn btn-primary moveDown">Reset file</button>
                     </div>
                     <div id="fileError"><p id="errorText"></p></div>
                 </form>
@@ -98,7 +99,6 @@
             <h3>Wikipedia does not have an article with that title.
                 Insert a different title and try again.
             </h3>
-
         </div>
 
         <div ng-view>

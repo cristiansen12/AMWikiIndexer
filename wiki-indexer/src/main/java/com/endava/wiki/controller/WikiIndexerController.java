@@ -101,24 +101,18 @@ public class WikiIndexerController {
             version = "";
         }
 
-//        System.out.println(version + " - versiunea");
         metadataDTO.setVersion(version);
-        System.out.println(metadataDTO.getVersion() + "asdf");
 
         try {
             if (InetAddress.getLocalHost().getHostAddress().equals(IP)) {
-//                System.out.println("equals!");
                 metadataDTO.setEnvironment(1);
             } else {
-//                System.out.println("not equals!");
                 metadataDTO.setEnvironment(0); //release
             }
-//            System.out.println(InetAddress.getLocalHost().getHostAddress());
         } catch (UnknownHostException e) {
             e.printStackTrace();
         }
 
-//        System.out.println(metadataDTO.getVersion());
         return metadataDTO;
     }
 }

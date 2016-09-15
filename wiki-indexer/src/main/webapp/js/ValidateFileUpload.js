@@ -16,6 +16,7 @@ function validateFile(oInput) {
             if (!blnValid) {
                 oInput.value = "";
                 document.getElementById("errorText").innerHTML = "* Please insert a valid .txt file!";
+                document.getElementById("resetButton").click();
                 return false;
             }
         }
@@ -25,4 +26,9 @@ function validateFile(oInput) {
 
 function clearError() {
     document.getElementById("errorText").innerHTML = "";
+}
+
+window.reset = function (e) {
+    e.wrap('<form>').closest('form').get(0).reset();
+    e.unwrap();
 }
