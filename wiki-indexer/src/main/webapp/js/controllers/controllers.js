@@ -356,9 +356,12 @@ function validate(string) {
 
             $scope.init = function () {
                 $scope.version = '___';
+                $scope.ip = '__';
                 $scope.response1 = InitFactory.query({});
                 $scope.response1.$promise.then(function (data) {
+                    console.log(data.ip);
                     $scope.version = data.version;
+                    $scope.ip = data.ip;
                     $scope.environmentObj = {
                         "color" : "black",
                         "backgroundColor" : "white"

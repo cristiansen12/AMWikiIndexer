@@ -10,6 +10,7 @@ public class MetadataDTO {
 
     private int environment;
     private String version;
+    private String ip;
 
     public void setEnvironment(int environment) {
         this.environment = environment;
@@ -21,5 +22,13 @@ public class MetadataDTO {
 
     public String getVersion() {
         return version;
+    }
+
+    public void addIP(String ip) {
+        this.ip = ip;
+    }
+
+    public String getIP(){
+        return ip;
     }
 }
